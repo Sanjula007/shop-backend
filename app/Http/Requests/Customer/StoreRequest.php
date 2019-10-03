@@ -37,17 +37,5 @@ class StoreRequest extends FormRequest
 		];
 	}
 
-	/**
-	 * Custom message for validation
-	 *
-	 * @return array
-	 */
-	public function messages ()
-	{
-		return [
-			'email.required' => 'Email is required!' ,
-			'fname.required' => 'First Name is required!'
-		];
-	}
 
 }

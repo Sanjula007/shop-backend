@@ -145,6 +145,18 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+    	'email' => 'Email Address',
+		'address' => 'Address',
+		'address.address1' => 'Address 1',
+		'address.address2' => 'Address 2',
+		'address.address3' => 'Address 3',
+		'address1' => 'Address 1',
+		'address2' => 'Address 2',
+		'address3' => 'Address 3',
+		'fname' => 'First Name',
+		'lname' => 'Last Name',
+		'Phone' => 'Phone Number'
+	],
 
 ];
