@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Requests\Product\ProductStoreRequest;
+use App\Http\Requests\Product\ProductUpdateRequest;
 use App\Product;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -24,10 +25,10 @@ class ProductController extends Controller
 	/**
 	 * Store a newly created resource in storage.
 	 *
-	 * @param  \Illuminate\Http\Request $request
+	 * @param ProductStoreRequest $request
 	 * @return \Illuminate\Http\JsonResponse
 	 */
-	public function store ( Request $request )
+	public function store ( ProductStoreRequest $request )
 	{
 		$filename = 'no-image.jpg';
 		if ( $request->hasfile ( 'image' ) ) {
@@ -68,11 +69,11 @@ class ProductController extends Controller
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  \Illuminate\Http\Request $request
-	 * @param  \App\Product             $product
-	 * @return \Illuminate\Http\Response
+	 * @param ProductUpdateRequest $request
+	 * @param  \App\Product        $product
+	 * @return \Illuminate\Http\JsonResponse
 	 */
-	public function update ( Request $request , Product $product )
+	public function update ( ProductUpdateRequest $request , Product $product )
 	{
 		$product->name        = $request->input ( 'name' );
 		$product->description = $request->input ( 'description' );
