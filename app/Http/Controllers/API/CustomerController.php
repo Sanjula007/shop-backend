@@ -6,10 +6,8 @@ use App\Address;
 use App\Customer;
 use App\Http\Requests\Customer\UpdateRequest;
 use App\Http\Requests\StoreRequest;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Validator;
 
 
 class CustomerController extends Controller
