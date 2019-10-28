@@ -32,9 +32,9 @@ class ProductController extends Controller
 	{
 		$filename = 'no-image.jpg';
 		if ( $request->hasfile ( 'image' ) ) {
-			$file      = $request->file ( 'image' );
-			$extension = $file->getClientOriginalExtension (); // getting image extension
-			$filename  = time () . '.' . $extension;
+			$file         = $request->file ( 'image' );
+			$extension    = $file->getClientOriginalExtension (); // getting image extension
+			$filename     = time () . '.' . $extension;
 			$image_resize = Image::make ( $file->getRealPath () );
 			$image_resize->resize ( 700 , null , function ( $constraint ) {
 				$constraint->aspectRatio ();
@@ -81,15 +81,15 @@ class ProductController extends Controller
 		$product->category    = $request->input ( 'category' );
 
 		if ( $request->hasfile ( 'image' ) ) {
-			$file      = $request->file ( 'image' );
-			$extension = $file->getClientOriginalExtension (); // getting image extension
-			$filename  = time () . '.' . $extension;
+			$file         = $request->file ( 'image' );
+			$extension    = $file->getClientOriginalExtension (); // getting image extension
+			$filename     = time () . '.' . $extension;
 			$image_resize = Image::make ( $file->getRealPath () );
 			$image_resize->resize ( 700 , null , function ( $constraint ) {
 				$constraint->aspectRatio ();
 			} );
 			$image_resize->save ( public_path ( 'uploads/products/' . $filename ) );
-			$product->image       = $filename;
+			$product->image = $filename;
 		}
 
 		$product->save ();

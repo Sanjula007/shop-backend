@@ -5,8 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Address;
 use App\Customer;
 use App\Http\Requests\Customer\UpdateRequest;
-use App\Http\Requests\StoreRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Customer\StoreRequest;
 use Illuminate\Support\Facades\Response;
 
 
@@ -15,11 +15,12 @@ class CustomerController extends Controller
 	/**
 	 * Display a listing of the resource.
 	 *
-	 * @return \Illuminate\Http\Response
+	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function index ()
 	{
 		$customers = Customer::with ( 'address' )->paginate ( 15 );
+
 		return Response::json ( $customers , 200 );
 	}
 
@@ -27,28 +28,19 @@ class CustomerController extends Controller
 	 * Store a newly created resource in storage.
 	 *
 	 * @param  \Illuminate\Http\Request $request
-	 * @return \Illuminate\Http\Response
+	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function store ( StoreRequest $request )
 	{
 
-
-		$address           = new Address();
-		$address->address1 = $request->input ( 'address.address1' );
-		$address->address2 = $request->input ( 'address.address2' );
-		$address->address3 = $request->input ( 'address.address3' );
-
+		$address = new Address( $request->get ( 'address' ) );
 		$address->save ();
 
-		$cus = new Customer();
-
-		$cus->fname      = $request->input ( 'fname' );
-		$cus->lname      = $request->input ( 'lname' );
-		$cus->phone      = $request->input ( 'phone' );
-		$cus->email      = $request->input ( 'email' );
+		$cus = new Customer( $request->only ( [ 'fname' , 'lname' , 'phone' , 'email' ] ) );
+		$cus->address ()->create ( $request->get ( 'address' ) );
 		$cus->address_id = $address->id;
-
 		$cus->save ();
+
 		$cus->address;
 
 		return Response::json ( [ 'success' => true , 'customer' => $cus ] , 200 );
@@ -58,7 +50,7 @@ class CustomerController extends Controller
 	 * Display the specified resource.
 	 *
 	 * @param  \App\Customer $customer
-	 * @return \Illuminate\Http\Response
+	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function show ( Customer $customer )
 	{
@@ -72,18 +64,14 @@ class CustomerController extends Controller
 	 *
 	 * @param  \Illuminate\Http\Request $request
 	 * @param  \App\Customer            $customer
-	 * @return \Illuminate\Http\Response
+	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function update ( UpdateRequest $request , Customer $customer )
 	{
 
-
-		$customer->fname = $request->input ( 'fname' );
-		$customer->lname = $request->input ( 'lname' );
-		$customer->phone = $request->input ( 'phone' );
-		$customer->email = $request->input ( 'email' );
-
+		$customer->update ( $request->only ( [ 'fname' , 'lname' , 'phone' , 'email' , 'address_id' ] ) );
 		$customer->save ();
+
 		$customer->address;
 		return Response::json ( [ 'success' => true , 'customer' => $customer ] , 200 );
 
@@ -93,7 +81,8 @@ class CustomerController extends Controller
 	 * Remove the specified resource from storage.
 	 *
 	 * @param  \App\Customer $customer
-	 * @return \Illuminate\Http\Response
+	 * @return \Illuminate\Http\JsonResponse
+	 * @throws \Exception
 	 */
 	public function destroy ( Customer $customer )
 	{
