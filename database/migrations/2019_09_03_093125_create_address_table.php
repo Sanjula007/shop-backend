@@ -18,6 +18,7 @@ class CreateAddressTable extends Migration
             $table->string ('address1',255);
             $table->string ('address2',255);
             $table->string ('address3',255);
+            $table->integer ('customer_id');
             $table->timestamps();
         });
     }

@@ -15,6 +15,6 @@ class Customer extends Model
 
 	public function address ()
 	{
-		return $this->hasOne ( 'App\Address' , 'id' , 'address_id' );
+		return $this->hasOne ( 'App\Address' );
 	}
 }

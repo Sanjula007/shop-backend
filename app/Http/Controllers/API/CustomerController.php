@@ -7,6 +7,8 @@ use App\Customer;
 use App\Http\Requests\Customer\UpdateRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Customer\StoreRequest;
+
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
 
@@ -32,14 +34,11 @@ class CustomerController extends Controller
 	 */
 	public function store ( StoreRequest $request )
 	{
-
 		$address = new Address( $request->get ( 'address' ) );
-		$address->save ();
 
 		$cus = new Customer( $request->only ( [ 'fname' , 'lname' , 'phone' , 'email' ] ) );
-		$cus->address ()->create ( $request->get ( 'address' ) );
-		$cus->address_id = $address->id;
 		$cus->save ();
+		$cus->address ()->save ( $address );
 
 		$cus->address;
 
