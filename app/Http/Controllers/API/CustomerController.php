@@ -4,11 +4,10 @@ namespace App\Http\Controllers\API;
 
 use App\Address;
 use App\Customer;
-use App\Http\Requests\Customer\UpdateRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Customer\StoreRequest;
-
-use Illuminate\Http\Request;
+use App\Http\Requests\Customer\UpdateRequest;
+use App\Repositories\CustomerRepository;
 use Illuminate\Support\Facades\Response;
 
 
@@ -21,9 +20,7 @@ class CustomerController extends Controller
 	 */
 	public function index ()
 	{
-		$customers = Customer::with ( 'address' )->paginate ( 15 );
-
-		return Response::json ( $customers , 200 );
+		return Response::json ( CustomerRepository::all () , 200 );
 	}
 
 	/**
