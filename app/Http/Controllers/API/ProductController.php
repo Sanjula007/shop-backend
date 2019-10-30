@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\ProductStoreRequest;
 use App\Http\Requests\Product\ProductUpdateRequest;
 use App\Product;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -18,7 +18,7 @@ class ProductController extends Controller
 	 */
 	public function index ()
 	{
-		$customers = Product::with ( 'address' )->paginate ( 15 );
+		$customers = Product::with ( 'stock' )->paginate ( 15 );
 		return Response::json ( $customers , 200 );
 	}
 
