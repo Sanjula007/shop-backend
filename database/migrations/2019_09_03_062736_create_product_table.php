@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateProductTable extends Migration
 {
@@ -17,7 +17,7 @@ class CreateProductTable extends Migration
             $table->bigIncrements('id');
             $table->string ('name',255);
             $table->text ('description')->nullable ();
-            $table->float (10,2)->nullable ();
+			$table->float ( 'price' , 10 , 2 )->nullable ();
             $table->integer ('category')->nullable ();
             $table->string ('image')->nullable ();
 
