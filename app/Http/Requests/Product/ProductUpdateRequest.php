@@ -27,7 +27,7 @@ class ProductUpdateRequest extends FormRequest
 			'name'        => 'required|max:100' ,
 			'description' => 'required|max:1000' ,
 			'price'       => 'required|Numeric' ,
-			'category'    => 'required|Integer' ,
+			'category'    => 'required|Integer|exists:product_categories,pc_id' ,
 			'image'       => 'image' ,
 		];
     }
