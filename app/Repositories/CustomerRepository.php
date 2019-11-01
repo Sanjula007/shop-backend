@@ -14,7 +14,7 @@ class CustomerRepository implements CustomerRepositoryInterface
 {
 	public static function all ()
 	{
-		return Customer::with ( 'address' )->paginate ( 15 );;
+		return Customer::with ( 'address' )->paginate ( 15 );
 	}
 
 
