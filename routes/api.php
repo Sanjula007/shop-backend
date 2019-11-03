@@ -18,10 +18,12 @@ Route::middleware('auth:api')->get('/user', function ( Request $request ) {
 });
 
 Route::apiResources([
-                        'customers'           => 'API\CustomerController',
-                        'addresses'           => 'API\AddressController',
-                        'products/categories'            => 'API\ProductCategoryController',
-                        'products'            => 'API\ProductController',
+                        'customers'            => 'API\CustomerController',
+                        'addresses'            => 'API\AddressController',
+                        'products/categories'  => 'API\ProductCategoryController',
+                        'products'             => 'API\ProductController',
+                        'orders/{order}/items' => 'API\OrderItemController',
+                        'orders'               => 'API\OrderController',
                     ]);
 
 //Route::get('products/categories', 'API\ProductCategoryController@index');

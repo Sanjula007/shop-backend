@@ -7,7 +7,7 @@ use App\Customer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Customer\StoreRequest;
 use App\Http\Requests\Customer\UpdateRequest;
-use App\Repositories\CustomerRepository;
+use App\Repositories\Customer\CustomerRepository;
 use Illuminate\Support\Facades\Response;
 
 

@@ -6,7 +6,7 @@
  * Time: 2:26 PM
  */
 
-namespace App\Repositories;
+namespace App\Repositories\Customer;
 
 use App\Customer;
 

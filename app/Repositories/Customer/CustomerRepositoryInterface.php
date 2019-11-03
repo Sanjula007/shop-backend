@@ -6,7 +6,7 @@
  * Time: 2:25 PM
  */
 
-namespace App\Repositories;
+namespace App\Repositories\Customer;
 
 
 interface CustomerRepositoryInterface

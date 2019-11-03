@@ -16,8 +16,9 @@ class CreateOrdersTable extends Migration
         Schema::create('order', function (Blueprint $table) {
             $table->bigIncrements('o_id');
             $table->integer ('o_customer');
+            $table->integer ('o_status')->default(0);
             $table->float  ('o_discount',12,2)->default (0);
-            $table->float  ('o_total',12,2);
+            $table->float  ('o_total',12,2)->default(0);
             $table->string ('o_description',1024)->nullable ();
             $table->timestamps();
             $table->softDeletes ();
