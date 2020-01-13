@@ -13,12 +13,20 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware ( 'auth:api' )->get ( '/user' , function ( Request $request ) {
-	return $request->user ();
-} );
+Route::middleware('auth:api')->get('/user', function ( Request $request ) {
+    return $request->user();
+});
 
-Route::apiResources ( [
-						  'customers' => 'API\CustomerController' ,
-						  'addresses'  => 'API\AddressController',
-						  'products'  => 'API\ProductController'
-					  ] );
+Route::apiResources([
+                        'customers'            => 'API\CustomerController',
+                        'addresses'            => 'API\AddressController',
+                        'products/categories'  => 'API\ProductCategoryController',
+                        'products'             => 'API\ProductController',
+                        'orders/{order}/items' => 'API\OrderItemController',
+                        'orders'               => 'API\OrderController',
+                    ]);
+
+//Route::get('products/categories', 'API\ProductCategoryController@index');
+//Route::post('products/categories', 'API\ProductCategoryController@store');
+//Route::put('products/categories/{category}', 'API\ProductCategoryController@update');
+//Route::delete('products/categories/{category}', 'API\ProductCategoryController@destory');

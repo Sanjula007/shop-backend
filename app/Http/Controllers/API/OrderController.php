@@ -1,9 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
+;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Order\OrderStoreRequest;
+use App\Http\Requests\Order\OrderUpdateRequest;
 use App\Order;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class OrderController extends Controller
 {
@@ -17,57 +21,44 @@ class OrderController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store( OrderStoreRequest $request )
     {
-        //
+        $order = new Order($request->only([ 'o_customer', 'o_description' ]));
+        $order->save();
+
+
+        return Response::json([ 'success' => true, 'order' => $order ], 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\API\Order  $order
+     * @param  \App\Order $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show( Order $order )
     {
-        //
+        $order->items;
+
+        return Response::json ( [ 'success' => true , 'order' => $order ] , 200 );
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\API\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Order $order)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\API\Order  $order
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\API\Order $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update( OrderUpdateRequest $request, Order $order )
     {
         //
     }
@@ -75,10 +66,10 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\API\Order  $order
+     * @param  \App\API\Order $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function destroy( Order $order )
     {
         //
     }

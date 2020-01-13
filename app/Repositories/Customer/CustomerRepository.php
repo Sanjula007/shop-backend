@@ -6,7 +6,7 @@
  * Time: 2:26 PM
  */
 
-namespace App\Repositories;
+namespace App\Repositories\Customer;
 
 use App\Customer;
 
@@ -14,7 +14,7 @@ class CustomerRepository implements CustomerRepositoryInterface
 {
 	public function all ()
 	{
-		return Customer::with ( 'address' )->paginate ( 15 );;
+		return Customer::with ( 'address' )->paginate ( 15 );
 	}
 
 
