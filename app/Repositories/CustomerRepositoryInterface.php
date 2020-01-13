@@ -11,7 +11,7 @@ namespace App\Repositories;
 
 interface CustomerRepositoryInterface
 {
-	public static function all ();
+	public  function all ();
 
 	public function getWithAddress ( $customer_id );
 

@@ -16,11 +16,13 @@ class CustomerController extends Controller
 	/**
 	 * Display a listing of the resource.
 	 *
+	 * @param CustomerRepository $customer_repository
 	 * @return \Illuminate\Http\JsonResponse
 	 */
-	public function index ()
+	public function index (CustomerRepository $customer_repository)
 	{
-		return Response::json ( CustomerRepository::all () , 200 );
+
+		return Response::json ( $customer_repository->all () , 200 );
 	}
 
 	/**

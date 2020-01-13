@@ -12,7 +12,7 @@ use App\Customer;
 
 class CustomerRepository implements CustomerRepositoryInterface
 {
-	public static function all ()
+	public function all ()
 	{
 		return Customer::with ( 'address' )->paginate ( 15 );;
 	}
